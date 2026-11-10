@@ -28,6 +28,7 @@ function Home() {
       place: "",
       quantity: 480,
       recommended: false,
+      accessType: "JAVIER_DE_LA_ROSA",
     },
     {
       id: 2,
@@ -38,6 +39,7 @@ function Home() {
       place: "",
       quantity: 480,
       recommended: false, // Para destacar como en la imagen
+      accessType: "LIZ_PARDO",
     },
     {
       id: 3,
@@ -48,6 +50,7 @@ function Home() {
       place: "",
       quantity: 480,
       recommended: false,
+      accessType: "DAVID_SOLORIO",
     },
     {
       id: 4,
@@ -58,6 +61,7 @@ function Home() {
       place: "",
       quantity: 480,
       recommended: false,
+      accessType: "CAROLINA_TAVERA",
     },
   ];
   const [selectedDetail, setSelectedDetail] = useState(null);
@@ -66,7 +70,11 @@ function Home() {
     <Box sx={{ backgroundColor: "#FFFFFF", minHeight: "100vh", py: 4 }}>
       <Container maxWidth='lg'>
         {/* Encabezado y Logo Centrados */}
-        <Grid container spacing={3} justifyContent='center' textAlign='center'>
+        <Grid
+          container
+          spacing={3}
+          sx={{ justifyContent: "center", textAlign: "center" }}
+        >
           <Grid size={12}>
             <Box
               component='img'
@@ -101,8 +109,7 @@ function Home() {
             <Grid
               container
               spacing={3}
-              justifyContent='center'
-              alignItems='stretch'
+              sx={{ justifyContent: "center", alignItems: "stretch" }}
             >
               {masterClases.map((m) => (
                 <Grid key={m.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>

@@ -2,9 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <GoogleReCaptchaProvider reCaptchaKey='6Len0rcsAAAAAIJYpBuZY8P3E1l-7GQ0q5zmRDDw'>
+      <App />
+    </GoogleReCaptchaProvider>
   </StrictMode>,
 );
