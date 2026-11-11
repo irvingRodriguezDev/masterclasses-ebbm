@@ -14,10 +14,19 @@ import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import { useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-export default function PaymentSuccess({ event, buyerData, onGoHome }) {
-  const { email, name, quantity, selectedLabel } = useParams();
+export default function PaymentSuccess() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const type = searchParams.get("type");
+  const email = searchParams.get("email");
+  const name = searchParams.get("name");
+  const quantity = searchParams.get("quantity");
+  const selectedLabel = searchParams.get("selectedLabel");
+  const time = searchParams.get("time");
+  const date = searchParams.get("date");
+
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -127,19 +136,13 @@ export default function PaymentSuccess({ event, buyerData, onGoHome }) {
               >
                 <Typography
                   variant='body2'
-                  sx={{ color: "#5C464A", opacity: 0.7 }}
-                >
-                  Masterclass:
-                </Typography>
-                <Typography
-                  variant='body2'
                   sx={{
                     color: "#3D2B2F",
                     fontWeight: "bold",
                     fontFamily: "monospace",
                   }}
                 >
-                  {selectedLabel}
+                  {selectedLabel} - {date} - {time}
                 </Typography>
               </Box>
 
@@ -167,7 +170,7 @@ export default function PaymentSuccess({ event, buyerData, onGoHome }) {
                     backgroundColor: "#2a1d20",
                   },
                 }}
-                onClick={onGoHome}
+                onClick={() => navigate("/")}
               >
                 Regresar al Inicio de la Expo
               </Button>

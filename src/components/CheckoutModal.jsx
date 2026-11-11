@@ -75,6 +75,8 @@ export default function CheckoutModal({ open, onClose, event }) {
           profile: "Asistente Masterclass",
           isMasterclass: true, // Bandera clave que acordamos
           masterclassId: event.accessType, // Nombre o ID de la masterclass
+          time: event.time,
+          date: event.date,
           quantity: quantity,
           captcha: token, // Cambia por tu token real de captcha si aplica
         },
