@@ -9,6 +9,7 @@ import {
   Box,
   Container,
   Chip,
+  CardMedia,
 } from "@mui/material";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -16,7 +17,11 @@ import LogoBBM from "../assets/EBBM.webp";
 import EventDetailModal from "../components/EventDetailModal";
 import CheckoutModal from "../components/CheckoutModal";
 import { useState } from "react";
-
+import logo from "../assets/EBBM.webp";
+import MasterClassCaro from "../assets/MasterClassCaro.jpeg";
+import MasterClassDavid from "../assets/MasterClassDavid.jpeg";
+import MasterClassJavier from "../assets/MasterClassJavier.jpeg";
+import MasterClassLiz from "../assets/MasterClassLiz.jpeg";
 function Home() {
   const masterClases = [
     {
@@ -25,10 +30,12 @@ function Home() {
       subject: "Maquillaje Profesional",
       price: 300,
       time: "10:00 AM - 2:00 PM",
+      date: "13 de marzo 2027",
       place: "",
       quantity: 480,
       recommended: false,
       accessType: "JAVIER_DE_LA_ROSA",
+      image: MasterClassJavier,
     },
     {
       id: 2,
@@ -36,10 +43,12 @@ function Home() {
       subject: "Dual Forms",
       price: 300,
       time: "3:00 PM - 7:00 PM",
+      date: "13 de marzo 2027",
       place: "",
       quantity: 480,
       recommended: false, // Para destacar como en la imagen
       accessType: "LIZ_PARDO",
+      image: MasterClassLiz,
     },
     {
       id: 3,
@@ -47,10 +56,12 @@ function Home() {
       subject: "AutoMaquillaje",
       price: 300,
       time: "10:00 AM - 2:00 PM",
+      date: "14 de marzo 2027",
       place: "",
       quantity: 480,
       recommended: false,
       accessType: "DAVID_SOLORIO",
+      image: MasterClassDavid,
     },
     {
       id: 4,
@@ -58,21 +69,23 @@ function Home() {
       subject: "Manicura Pro",
       price: 300,
       time: "3:00 PM - 7:00 PM",
+      date: "14 de marzo 2027",
       place: "",
       quantity: 480,
       recommended: false,
       accessType: "CAROLINA_TAVERA",
+      image: MasterClassCaro,
     },
   ];
   const [selectedDetail, setSelectedDetail] = useState(null);
   const [selectedCheckout, setSelectedCheckout] = useState(null);
   return (
     <Box sx={{ backgroundColor: "#FFFFFF", minHeight: "100vh", py: 4 }}>
-      <Container maxWidth='lg'>
+      <Container maxWidth='xl'>
         {/* Encabezado y Logo Centrados */}
         <Grid
           container
-          spacing={3}
+          spacing={2}
           sx={{ justifyContent: "center", textAlign: "center" }}
         >
           <Grid size={12}>
@@ -80,13 +93,13 @@ function Home() {
               component='img'
               src={LogoBBM}
               alt='Logo BBM'
-              sx={{ width: 250, height: "auto", objectFit: "contain" }}
+              sx={{ width: 250, height: "auto", objectFit: "contain", mt: -5 }}
             />
           </Grid>
 
-          <Grid size={12}>
+          <Grid size={12} sx={{ mt: -5 }}>
             <Typography
-              variant='h3'
+              variant={{ xs: "h5", md: "h4" }}
               sx={{
                 color: "#3D2B2F",
                 fontWeight: "bold",
@@ -98,7 +111,7 @@ function Home() {
             </Typography>
             <Typography
               variant='body1'
-              sx={{ color: "#3D2B2F", opacity: 0.8, mt: 1 }}
+              sx={{ color: "#3D2B2F", opacity: 0.8, mt: 0 }}
             >
               Asegura tu lugar en la capacitación más esperada de la temporada.
             </Typography>
@@ -150,7 +163,7 @@ function Home() {
                     )}
 
                     {/* Cabecera de la Tarjeta con Color de Fondo */}
-                    <CardHeader
+                    {/* <CardHeader
                       title={m.subject}
                       subheader={`Instructor: ${m.name}`}
                       sx={{
@@ -169,8 +182,12 @@ function Home() {
                           mt: 0.5,
                         },
                       }}
-                    />
-
+                    /> */}
+                    <img src={m.image} width='100%' height='auto' />
+                    {/* <CardMedia
+                      image={m.image}
+                      sx={{ height: 350, objectFit: "cover" }}
+                    /> */}
                     {/* Contenido de la Tarjeta */}
                     <CardContent
                       sx={{ textAlign: "center", flexGrow: 1, pt: 2.5 }}
@@ -179,7 +196,7 @@ function Home() {
                         variant='body2'
                         sx={{ color: "#3D2B2F", opacity: 0.7 }}
                       >
-                        13 de Marzo de 2027
+                        {m.date}
                       </Typography>
                       <Typography
                         variant='body2'

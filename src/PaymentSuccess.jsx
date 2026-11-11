@@ -8,34 +8,21 @@ import {
   CardContent,
   Divider,
   Paper,
+  Alert,
 } from "@mui/material";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import { useParams } from "react-router-dom";
 
 export default function PaymentSuccess({ event, buyerData, onGoHome }) {
-  // Datos de respaldo por si se accede directamente sin props
-  const eventData = event || {
-    subject: "Masterclass en Vivo",
-    name: "Instructor Invitado",
-    price: 300,
-    time: "10:00 AM - 2:00 PM",
-  };
-
-  const client = buyerData || {
-    name: "Invitado",
-    email: "correo@ejemplo.com",
-    phone: "5555555555",
-    quantity: 1,
-  };
-
-  const total = eventData.price * client.quantity;
-  const orderId = "BBM-" + Math.floor(100000 + Math.random() * 900000);
+  const { email, name, quantity, selectedLabel } = useParams();
 
   return (
     <Box
       sx={{
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#FFF9FA",
         minHeight: "100vh",
         py: 6,
         display: "flex",
@@ -44,51 +31,90 @@ export default function PaymentSuccess({ event, buyerData, onGoHome }) {
     >
       <Container maxWidth='sm'>
         <Card
-          elevation={3}
+          elevation={4}
           sx={{
             borderRadius: "24px",
             border: "1px solid #FFCBDA",
             overflow: "hidden",
-            textAlign: "center",
+            boxShadow: "0 20px 40px rgba(61, 43, 47, 0.1)",
           }}
         >
-          {/* Cabecera decorativa */}
+          {/* Cabecera Institucional Premium */}
           <Box
             sx={{
-              backgroundColor: "#FFD8E2",
+              backgroundColor: "#3D2B2F",
               py: 4,
-              px: 2,
+              px: 3,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              textAlign: "center",
               gap: 1.5,
             }}
           >
-            <CheckCircleRoundedIcon sx={{ fontSize: 72, color: "#3D2B2F" }} />
+            <Box
+              sx={{
+                backgroundColor: "rgba(255, 216, 226, 0.15)",
+                p: 2,
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CheckCircleRoundedIcon sx={{ fontSize: 56, color: "#FFD8E2" }} />
+            </Box>
             <Typography
               variant='h4'
               sx={{
-                color: "#3D2B2F",
-                fontWeight: "bold",
+                color: "#FFFFFF",
+                fontWeight: 900,
+                letterSpacing: 0.5,
                 textTransform: "uppercase",
               }}
             >
               ¡Pago Exitoso!
             </Typography>
             <Typography
-              variant='body1'
-              sx={{ color: "#3D2B2F", opacity: 0.85 }}
+              variant='body2'
+              sx={{ color: "#FFD8E2", opacity: 0.9, maxWidth: "400px" }}
             >
-              Tu lugar ha sido reservado con éxito. ¡Te esperamos!
+              Tu transacción se ha procesado correctamente y tu lugar se
+              encuentra oficialmente asegurado.
             </Typography>
           </Box>
 
           {/* Contenido del Resumen */}
-          <CardContent sx={{ p: 4 }}>
+          <CardContent sx={{ p: 4, backgroundColor: "#FFFFFF" }}>
+            {/* Aviso Importante sobre el Correo y Spam */}
+            <Alert
+              icon={<EmailOutlinedIcon sx={{ color: "#3D2B2F" }} />}
+              sx={{
+                backgroundColor: "#FFD8E2",
+                color: "#3D2B2F",
+                borderRadius: "16px",
+                mb: 3,
+                alignItems: "center",
+                "& .MuiAlert-message": { fontSize: "0.9rem" },
+              }}
+            >
+              Tus boletos digitales han sido enviados a <strong>{email}</strong>
+              .
+              <br />
+              <span
+                style={{ fontSize: "0.8rem", opacity: 0.85, fontWeight: 600 }}
+              >
+                ⚠️ Importante: Si no lo visualizas en tu bandeja principal, por
+                favor revisa tu carpeta de{" "}
+                <strong>correo no deseado (Spam)</strong>.
+              </span>
+            </Alert>
+
+            {/* Recibo / Resumen de la Orden */}
             <Paper
               elevation={0}
               sx={{
-                backgroundColor: "#FAF6F8",
+                backgroundColor: "#FFF9FA",
                 p: 3,
                 borderRadius: "16px",
                 textAlign: "left",
@@ -101,109 +127,49 @@ export default function PaymentSuccess({ event, buyerData, onGoHome }) {
               >
                 <Typography
                   variant='body2'
-                  sx={{ color: "#3D2B2F", opacity: 0.7 }}
+                  sx={{ color: "#5C464A", opacity: 0.7 }}
                 >
-                  Número de Orden:
+                  Masterclass:
                 </Typography>
                 <Typography
                   variant='body2'
-                  sx={{ color: "#3D2B2F", fontWeight: "bold" }}
+                  sx={{
+                    color: "#3D2B2F",
+                    fontWeight: "bold",
+                    fontFamily: "monospace",
+                  }}
                 >
-                  {orderId}
+                  {selectedLabel}
                 </Typography>
               </Box>
 
-              <Divider sx={{ mb: 2 }} />
+              <Divider sx={{ mb: 2, borderColor: "#FFCBDA" }} />
 
-              <Typography
-                variant='subtitle1'
-                sx={{ color: "#3D2B2F", fontWeight: "bold", mb: 1 }}
-              >
-                {eventData.subject}
+              <Typography variant='body2' sx={{ color: "#5C464A", mb: 0.5 }}>
+                <strong>Asistente:</strong> {name}
               </Typography>
-              <Typography variant='body2' sx={{ color: "#3D2B2F", mb: 0.5 }}>
-                <strong>Instructor:</strong> {eventData.name}
-              </Typography>
-              <Typography variant='body2' sx={{ color: "#3D2B2F", mb: 0.5 }}>
-                <strong>Horario:</strong> {eventData.time}
-              </Typography>
-              <Typography variant='body2' sx={{ color: "#3D2B2F", mb: 0.5 }}>
-                <strong>Asistente:</strong> {client.name}
-              </Typography>
-              <Typography variant='body2' sx={{ color: "#3D2B2F", mb: 2 }}>
-                <strong>Correo:</strong> {client.email}
-              </Typography>
-
-              <Divider sx={{ mb: 2 }} />
-
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  variant='body1'
-                  sx={{ color: "#3D2B2F", fontWeight: "bold" }}
-                >
-                  Total Pagado ({client.quantity} boleto
-                  {client.quantity > 1 ? "s" : ""}):
-                </Typography>
-                <Typography
-                  variant='h5'
-                  sx={{ color: "#3D2B2F", fontWeight: "bold" }}
-                >
-                  ${total}.00 MXN
-                </Typography>
-              </Box>
             </Paper>
 
-            <Typography
-              variant='body2'
-              sx={{ color: "#3D2B2F", opacity: 0.8, mb: 3 }}
-            >
-              Hemos enviado tu comprobante y pase de acceso digital a tu correo
-              electrónico.
-            </Typography>
-
-            {/* Botones de Acción */}
+            {/* Botón de Regreso al Inicio */}
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
               <Button
                 variant='contained'
-                startIcon={<DownloadRoundedIcon />}
+                startIcon={<ArrowBackRoundedIcon />}
                 sx={{
                   backgroundColor: "#3D2B2F",
                   color: "#FFFFFF",
                   py: 1.5,
-                  borderRadius: "12px",
+                  borderRadius: "14px",
                   fontWeight: "bold",
                   textTransform: "none",
-                  "&:hover": { backgroundColor: "#2a1d20" },
-                }}
-                onClick={() => alert("Simulando descarga de boleto PDF...")}
-              >
-                Descargar Pase de Acceso
-              </Button>
-
-              <Button
-                variant='outlined'
-                startIcon={<ArrowBackRoundedIcon />}
-                sx={{
-                  borderColor: "#3D2B2F",
-                  color: "#3D2B2F",
-                  py: 1.5,
-                  borderRadius: "12px",
-                  fontWeight: "bold",
-                  textTransform: "none",
+                  boxShadow: "0 4px 14px rgba(61, 43, 47, 0.2)",
                   "&:hover": {
-                    borderColor: "#3D2B2F",
-                    backgroundColor: "#FFD8E2",
+                    backgroundColor: "#2a1d20",
                   },
                 }}
                 onClick={onGoHome}
               >
-                Regresar al Inicio
+                Regresar al Inicio de la Expo
               </Button>
             </Box>
           </CardContent>
