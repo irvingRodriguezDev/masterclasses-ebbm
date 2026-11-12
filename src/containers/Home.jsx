@@ -29,7 +29,7 @@ function Home() {
       name: "Javier de la Rosa",
       subject: "Maquillaje Profesional",
       price: 300,
-      time: "10:00 AM - 2:00 PM",
+      time: "11:00 AM - 1:00 PM",
       date: "13 de marzo 2027",
       place: "",
       quantity: 480,
